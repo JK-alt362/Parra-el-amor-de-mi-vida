@@ -1,0 +1,595 @@
+body {
+
+    margin: 0;
+
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+
+    font-family: Arial, sans-serif;
+
+    text-align: center;
+}
+
+
+/* CARTA */
+
+#carta {
+
+    display: none;
+
+    width: 90%;
+    max-width: 750px;
+}
+
+
+.carta-contenido {
+
+    background: #fffaf5;
+
+    padding: 50px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.25);
+
+    border: 2px solid #f3c6d3;
+
+    position: relative;
+
+    animation: aparecer 1.5s ease;
+}
+
+
+.carta-contenido::before {
+
+    content: "♥";
+
+    position: absolute;
+
+    top: 15px;
+    left: 25px;
+
+    font-size: 25px;
+
+    color: #d6336c;
+}
+
+
+.carta-contenido::after {
+
+    content: "♥";
+
+    position: absolute;
+
+    bottom: 15px;
+    right: 25px;
+
+    font-size: 25px;
+
+    color: #d6336c;
+}
+
+
+.carta-contenido h1 {
+
+    color: #8b1e3f;
+
+    font-size: 40px;
+
+    margin-bottom: 30px;
+}
+
+
+.carta-contenido p {
+
+    color: #5c2333;
+
+    line-height: 1.9;
+
+    font-size: 19px;
+
+    margin-bottom: 20px;
+}
+
+
+/* ANIMACIÓN DE LA CARTA */
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(30px)
+            scale(0.95);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* TEXTO ESCRITO */
+
+.texto-escrito {
+
+    border-right: 3px solid #d6336c;
+
+    display: inline-block;
+
+    min-height: 1.5em;
+
+    animation: cursor 0.7s infinite;
+}
+
+
+@keyframes cursor {
+
+    50% {
+
+        border-color: transparent;
+    }
+}
+
+
+/* PÁRRAFOS */
+
+.parrafo-carta {
+
+    opacity: 0;
+
+    transform: translateY(25px);
+}
+
+
+.parrafo-carta.visible {
+
+    animation:
+        aparecerParrafo
+        1.2s ease
+        forwards;
+}
+
+
+@keyframes aparecerParrafo {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(25px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+}
+
+
+/* CORAZONES FLOTANTES */
+
+.corazon-flotante {
+
+    position: fixed;
+
+    bottom: -40px;
+
+    pointer-events: none;
+
+    z-index: 10;
+
+    animation-name: flotar;
+
+    animation-timing-function: linear;
+
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes flotar {
+
+    from {
+
+        transform:
+            translateY(0)
+            rotate(0deg);
+
+        opacity: 0;
+    }
+
+    15% {
+
+        opacity: 1;
+    }
+
+    to {
+
+        transform:
+            translateY(-110vh)
+            rotate(20deg);
+
+        opacity: 0;
+    }
+}
+
+
+/* BOTÓN */
+
+.boton-carta {
+
+    padding: 16px 35px;
+
+    border: 2px solid #8b1e3f;
+
+    border-radius: 50px;
+
+    background: #8b1e3f;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+}
+
+
+.boton-carta:hover {
+
+    transform:
+        translateY(-5px)
+        scale(1.05);
+
+    box-shadow:
+        0 10px 25px
+        rgba(139, 30, 63, 0.35);
+
+    background: #a92550;
+}
+
+
+.boton-carta:active {
+
+    transform: scale(0.95);
+}
+
+
+/* SOBRE */
+
+.sobre {
+
+    position: relative;
+
+    width: 280px;
+
+    height: 180px;
+
+    margin: 30px auto;
+
+    background: #f3a6b8;
+
+    border-radius: 8px;
+
+    box-shadow:
+        0 15px 30px
+        rgba(0, 0, 0, 0.2);
+
+    overflow: hidden;
+
+    perspective: 800px;
+}
+
+
+/* PAPEL */
+
+.papel {
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 140px;
+
+    background: #fffaf5;
+
+    left: 30px;
+
+    top: 20px;
+
+    border-radius: 5px;
+
+    z-index: 1;
+
+    transition:
+        transform 0.8s ease;
+
+    transform-origin:
+        bottom center;
+}
+
+
+/* SOLAPA */
+
+.solapa {
+
+    position: absolute;
+
+    width: 0;
+
+    height: 0;
+
+    top: 0;
+
+    left: 0;
+
+    border-left:
+        140px solid transparent;
+
+    border-right:
+        140px solid transparent;
+
+    border-top:
+        95px solid #e889a2;
+
+    z-index: 3;
+
+    transform-origin:
+        top center;
+
+    transition:
+        transform 0.8s ease;
+}
+.sobre::after {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 90px;
+
+    background: #f3a6b8;
+
+    z-index: 3;
+}
+
+/* SOBRE ABIERTO */
+
+.sobre.abierto .solapa {
+
+    transform: rotateX(180deg);
+}
+
+
+.sobre.abierto .papel {
+
+    transform:
+        translateY(-110px);
+}
+
+
+/* FINAL DE LA CARTA */
+
+.final-carta {
+
+    margin-top: 50px;
+
+    padding-top: 30px;
+
+    border-top:
+        1px solid #f3c6d3;
+
+    text-align: center;
+
+    opacity: 0;
+
+    transform:
+        translateY(25px);
+}
+
+
+.final-carta.visible {
+
+    animation:
+        aparecerFinal
+        1.5s ease
+        forwards;
+}
+
+
+.corazon-final {
+
+    font-size: 45px;
+
+    margin-bottom: 10px;
+
+    animation:
+        latido
+        1.5s infinite;
+}
+
+
+.final-carta h2 {
+
+    color: #8b1e3f;
+
+    font-size: 32px;
+
+    margin: 10px 0;
+}
+
+
+.final-carta p {
+
+    color: #5c2333;
+
+    font-size: 18px;
+
+    line-height: 1.8;
+}
+
+
+@keyframes aparecerFinal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+@keyframes latido {
+
+    0%, 100% {
+
+        transform: scale(1);
+    }
+
+    50% {
+
+        transform: scale(1.2);
+    }
+}
+.foto-carta {
+
+    margin: 35px auto;
+
+    width: 80%;
+    max-width: 450px;
+
+    opacity: 0;
+
+    transform:
+        translateY(30px)
+        scale(0.95);
+
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s ease;
+}
+
+
+.foto-carta.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+
+.foto-carta img {
+
+    width: 100%;
+
+    display: block;
+
+    border-radius: 15px;
+
+    border: 4px solid white;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0, 0, 0, 0.2);
+}
+/* VERSIÓN PARA MÓVIL */
+
+@media (max-width: 600px) {
+
+    h1 {
+        font-size: 36px;
+    }
+
+    #inicio {
+        width: 90%;
+    }
+
+    #inicio p {
+        font-size: 18px;
+    }
+
+    .sobre {
+        width: 240px;
+        height: 155px;
+    }
+
+    .papel {
+        width: 190px;
+        height: 120px;
+        left: 25px;
+    }
+
+    .solapa {
+        border-left-width: 120px;
+        border-right-width: 120px;
+        border-top-width: 82px;
+    }
+
+    .boton-carta {
+        font-size: 16px;
+        padding: 14px 28px;
+    }
+
+    #carta {
+        width: 94%;
+    }
+
+    .carta-contenido {
+        padding: 30px 20px;
+    }
+
+    .carta-contenido h1 {
+        font-size: 30px;
+    }
+
+    .carta-contenido p {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    .foto-carta {
+        width: 95%;
+    }
+
+    .final-carta h2 {
+        font-size: 28px;
+    }
+
+}
